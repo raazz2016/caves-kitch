@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+
+  --color-cave-black: #0d0d0d;
+  --color-cave-charcoal: #1a1a1a;
+  --color-cave-burgundy: #4a0e17;
+  --color-cave-burgundy-light: #721c24;
+  --color-cave-gold: #d4a745;
+  --color-cave-gold-light: #e6c27a;
+  --color-cave-cream: #fdfbf7;
+}
+
+@layer base {
+  body {
+    @apply bg-cave-black text-cave-cream font-sans antialiased selection:bg-cave-gold selection:text-cave-black;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+}
+
+@layer utilities {
+  .theme-logo-filter {
+    /* 1. Invert: white bg -> black, black logo -> white
+       2. Grayscale & Contrast: completely crush any faint grays into pure black so the background is 100% invisible
+       3. Sepia: white logo -> light yellow
+       4. Hue-rotate: shift yellow towards gold/amber
+       5. Saturate: make the gold richer
+       6. Brightness: fine-tune the lightness to match #d4a745 */
+    filter: invert(1) grayscale(1) contrast(10) sepia(1) hue-rotate(-15deg) saturate(5) brightness(0.9);
+    mix-blend-mode: screen;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-cave-black;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-cave-charcoal rounded-full border border-cave-black;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-cave-gold;
+}
